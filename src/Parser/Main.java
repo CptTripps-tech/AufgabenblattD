@@ -13,6 +13,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -61,36 +62,29 @@ public class Main {
                 int id=0;
 
 
+                Node personen=doc.getFirstChild();
+
+                Element root=doc.createElement("personen");
+                personen.appendChild(root);
+
                 System.out.println("id:");
                 id=sc.nextInt();
-
-                Element rootElement=doc.createElement("person");
-                doc.appendChild(rootElement);
-
-                Element ID = doc.createElement("id");
-                rootElement.appendChild(ID);
-
+                Element Person=doc.createElement("person");
+                Person.se("person id=",""+id);
+                personen.appendChild(Person);
 
                 System.out.println("Name:");
                 name=sc.next();
                 Element Name =doc.createElement("name");
-                doc.appendChild(doc.createAttribute(name));
+                Name.setAttribute("name",""+name);
+                Person.appendChild(Name);
 
 
                 System.out.println("Vorname:");
                 vorname=sc.next();
                 Element Vorname= doc.createElement("vorname");
-                doc.appendChild(doc.createAttribute(vorname));
-
-                System.out.println("Ort:");
-                ort=sc.next();
-                Element Ort=doc.createElement("ort");
-                doc.appendChild(doc.createAttribute(ort));
-
-                System.out.println("PLZ:");
-                plz=sc.next();
-                Element PLZ=doc.createElement("postleitzahl");
-                doc.appendChild(doc.createAttribute(plz));
+                Vorname.setAttribute("vorname",""+vorname);
+                Person.appendChild(Vorname);
 
                 DateFormat format= new SimpleDateFormat("DD.MM.YYYY");
                 System.out.println("Geburtsdatum:");
@@ -101,28 +95,50 @@ public class Main {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                GBD.appendChild(doc.createAttribute(String.valueOf(date)));
+                GBD.setAttribute("geburtsdatum",""+date);
+                Person.appendChild(GBD);
+
+                System.out.println("PLZ:");
+                plz=sc.next();
+                Element PLZ=doc.createElement("postleitzahl");
+                PLZ.setAttribute("postleitzahl",""+plz);
+                Person.appendChild(PLZ);
+
+                System.out.println("Ort:");
+                ort=sc.next();
+                Element Ort=doc.createElement("ort");
+                Ort.setAttribute("ort",""+ort);
+                Person.appendChild(Ort);
 
                 System.out.println("Hobby:");
                 hobby=sc.next();
                 Element Hobby=doc.createElement("hobby");
-                Hobby.appendChild(doc.createAttribute(hobby));
+                Hobby.setAttribute("hobby",""+hobby);
+                Person.appendChild(Hobby);
 
                 System.out.println("Lieblingsgericht:");
                 liebger=sc.next();
                 Element Gericht=doc.createElement("lieblingsgericht");
-                Gericht.appendChild(doc.createAttribute(liebger));
+                Gericht.setAttribute("lieblingsgericht",""+liebger);
+                Person.appendChild(Gericht);
 
                 System.out.println("Lieblingsband:");
                 band=sc.next();
                 Element Band=doc.createElement("leiblingsband");
-                Band.appendChild(doc.createAttribute(band));
-
+                Band.setAttribute("lieblingsband",""+band);
+                Person.appendChild(Band);
             }
 
             if(choice==false){
                 System.exit(0);
             }
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(path));
+            transformer.transform(source, result);
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -130,6 +146,10 @@ public class Main {
         } catch (SAXException e) {
             e.printStackTrace();
         } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
             e.printStackTrace();
         }
     }

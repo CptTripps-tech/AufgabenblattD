@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<personen>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><personen>
     <person id="1">
         <name>Mustermann</name>
         <vorname>Max</vorname>
