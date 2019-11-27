@@ -1,15 +1,13 @@
-package Parser;
+package Person;
 
-import org.xml.sax.ContentHandler;
+import org.xml.sax.*;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
-import org.xml.sax.Locator;
-import org.xml.sax.SAXException;
 
 public class PersonenContentHandler implements ContentHandler {
     private ArrayList<Person> allePersonen = new ArrayList<Person>();

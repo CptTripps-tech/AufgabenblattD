@@ -13,4 +13,24 @@
         <postleitzahl>76543</postleitzahl>
         <ort>Bierdorf</ort>
     </person>
+    <person id="3">
+        <name>Parker</name>
+        <vorname>Peter</vorname>
+        <geburtsdatum>13.06.1983</geburtsdatum>
+        <postleitzahl>19083</postleitzahl>
+        <ort>NewYork</ort>
+        <hobby>Verbechensbekämpfung</hobby>
+        <lieblingsgericht>Pizza</lieblingsgericht>
+        <lieblingsband>Slipknot</lieblingsband>
+    </person>
+    <person id="4">
+        <name>Lane</name>
+        <vorname>Lois</vorname>
+        <geburtsdatum>12.07.1982</geburtsdatum>
+        <postleitzahl>13456</postleitzahl>
+        <ort>Smallville</ort>
+        <hobby>Lesen</hobby>
+        <lieblingsgericht>Nudeln</lieblingsgericht>
+        <lieblingsband>Coldplay</lieblingsband>
+    </person>
 </personen>
