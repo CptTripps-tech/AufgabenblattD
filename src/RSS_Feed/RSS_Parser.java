@@ -22,15 +22,16 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
+/**Der Parser um die Webseiteninfomrationen zu verarbeiten*/
 public class RSS_Parser {
     private URL url;
-    private ArrayList<String> feeds;
     private ArrayList<String> feed_titel;
 
+    /**Konstruktor für den Parser*/
     public RSS_Parser(){
-        super();
-    }
 
+    }
+    /**@param site Die URL-Adresse als String*/
     public void parse (String site) throws ParserConfigurationException, SAXException, IOException {
             url=new URL(site);
 
@@ -41,14 +42,10 @@ public class RSS_Parser {
             xr.setContentHandler(handler);
             xr.parse(new InputSource(url.openStream()));
 
-            this.feeds = handler.getFeeds();
             feed_titel=handler.getFeed_titel();
-
     }
-    public ArrayList<String> getFeeds(){
-        return feeds;
-    }
+    /**Die Liste der Nachrichten-Feeds abfragen*/
     public ArrayList<String> getFeed_titel(){
-        return this.feed_titel;
+        return feed_titel;
     }
 }

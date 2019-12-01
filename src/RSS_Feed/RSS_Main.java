@@ -8,6 +8,11 @@ import java.util.ArrayList;
 
 import static org.xml.sax.helpers.XMLReaderFactory.createXMLReader;
 
+/**Das Programm ruft den RSS-Feed einer bestimmten Webseite auf und
+ * gibt anschließend die Nachrichten-Überschriften auf der Konsole aus
+ *
+ * @Author Andy Gahler
+ * @since 21.11.2019*/
 public class RSS_Main {
     public static void main(String[] args) {
         String site = "http://www.tagesschau.de/xml/rss2";

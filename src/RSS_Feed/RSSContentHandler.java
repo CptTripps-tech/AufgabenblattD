@@ -9,15 +9,15 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**Die Klasse um den vom Parser gelieferten RSS-Feed zu verarbeiten*/
 public class RSSContentHandler implements ContentHandler {
     private Feed feed;
     private String currentvalue;
-    private ArrayList<String> feeds;
     private ArrayList<String> feed_titel;
     private String site;
 
+    /**Der Konstruktor für den Contenthandler*/
     public RSSContentHandler() {
-        feeds = new ArrayList<String>();
         feed_titel=new ArrayList<String>();
     }
 
@@ -26,6 +26,7 @@ public class RSSContentHandler implements ContentHandler {
         currentvalue = new String(ch, start, length);
     }
 
+    /**Sobald der Pasrer auf einen Channel-Tag stößt,wird ein neuer Feed erzeugt.*/
     @Override
     public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException {
         if (qName.equalsIgnoreCase("channel")) {
@@ -36,58 +37,45 @@ public class RSSContentHandler implements ContentHandler {
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
 
-        //Titel setzen
+        /**Den Titel setzen*/
         if (qName.equals("title")) {
             feed.setTitle(currentvalue);
         }
 
-        //Description setzen
+        /**Die Description setzen*/
         if (qName.equals("descritpion")) {
             feed.setDescription(currentvalue);
         }
 
-        //Link setzen
+        /**Den Link setzen*/
         if (qName.equals("link")) {
             feed.setLink(currentvalue);
         }
 
-        //Autor setzen
+        /**Den Autor setzen*/
         if (qName.equals("author")) {
             feed.setAuthor(currentvalue);
         }
 
-        //Language setzen
+        /**Die Language setzen*/
         if (qName.equals("language")) {
             feed.setLanguage(currentvalue);
         }
 
-        //Copyright setzen
+        /**Das Copyright setzen*/
         if (qName.equals("copyright")) {
             feed.setCopyright(currentvalue);
         }
+
+        /**Wenn der End-Tag erreicht wird, soll der aktuelle Titel
+         * zur Liste hinzugefügt werden*/
         if (qName.equals("title")) {
-            System.out.println(feed.getTitle());
+            feed_titel.add(currentvalue);
         }
-        if(currentvalue.equals(feed.getTitle())) {
-            parseTitle(currentvalue);
-        }
-        feeds.add(currentvalue);
     }
-
-    public void parseTitle(String value) {
-        if (value != null) {
-            feed_titel.add(value);
-        }
-
-
-    }
-    public ArrayList<String> getFeeds()
-    {
-        return this.feeds;
-    }
-
-    public ArrayList<String> getFeed_titel(){
-        return this.feed_titel;
+        /**Die Liste mit den Titel abrufen*/
+         public ArrayList<String> getFeed_titel(){
+             return feed_titel;
     }
 
 
